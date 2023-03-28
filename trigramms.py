@@ -1,5 +1,67 @@
 from lib.ChineseDate.dates import ChineseDate, GregDate
 
+class CommonTrigramm:
+    trigramm_names = ['Цянь (небо)', 'Дуй (Водоем)', 'Ли (Огонь)', 'Чжэнь (Гром)', 'Сюнь (Ветер)', 'Кань (Вода)', 'Гэнь (Гора)', 'Кунь (Земля)']
+    
+    def predict(self, num, sex):
+        if sex == 0:
+            if num == 0 or num == 6:
+                return 7
+            elif num == 1:
+                return 5
+            elif num == 2:
+                return 2
+            elif num == 3:
+                return 6
+            elif num == 4:
+                return 1
+            elif num == 5:
+                return 0
+            elif num == 7:
+                return 4
+            else:
+                return 3
+        elif sex == 1:
+            if num == 0 :
+                return 4
+            elif num == 1 or num == 4:
+                return 6
+            elif num == 2:
+                return 0
+            elif num == 3:
+                return 1
+            elif num == 5:
+                return 2
+            elif num == 6:
+                return 5
+            elif num == 7:
+                return 7
+            else:
+                return 3
+
+    def __init__(self, year, sex):
+        self.number = self.predict(year % 9, sex)
+
+    def get_trigramm(self, number):
+        bin_str = bin(number)[2:]
+        i = len(bin_str)
+        while i < 3:
+            bin_str = "0" + bin_str
+            i += 1
+        return bin_str
+        
+
+    def draw_trigramm(self):
+        bin_str = self.get_trigramm(self.number)
+        for i in reversed(range(3)):
+            if bin_str[i] == '0':
+                print("_____")
+            else:
+                print("__ __")
+
+  
+
+
 class Trigramm:
 
     l = [7, 5, 6, 3, 2, 1, 0, 4]
